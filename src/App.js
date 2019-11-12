@@ -10,9 +10,7 @@ class App extends React.Component {
   };
   getMovies = async () => {
     const {
-      data: {
-        data: { movies }
-      }
+      data: { data: { movies }}
     } = await axios.get(
       "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
     );
@@ -25,25 +23,28 @@ class App extends React.Component {
     const { isLoading, movies } = this.state;
     return (
       <section className="container">
+        <div className="header_container">
+          <a className="header_name" href="/">MovieFlex</a>
+        </div>
         {isLoading ? (
           <div className="loader">
             <span className="loader_text">Loading...</span>
           </div>
         ) : (
-          <div className="movies">
-            {movies.map(movie => (
-              <Movie
-                key={movie.id}
-                id={movie.id}
-                year={movie.year}
-                title={movie.title}
-                summary={movie.summary}
-                poster={movie.medium_cover_image}
-                genres={movie.genres}
-              />
-            ))}
-          </div>
-        )}
+            <div className="movies">
+              {movies.map(movie => (
+                <Movie
+                  key={movie.id}
+                  id={movie.id}
+                  year={movie.year}
+                  title={movie.title}
+                  summary={movie.summary}
+                  poster={movie.medium_cover_image}
+                  genres={movie.genres}
+                />
+              ))}
+            </div>
+          )}
       </section>
     );
   }
